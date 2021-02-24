@@ -56,7 +56,7 @@ const modals = () => {
     }, time);
   }
 
-  showModalByTime('.popup', 7000);
+  showModalByTime('.popup', 60000);
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
   bindModal('.phone_link', '.popup', '.popup .popup_close');
