@@ -24,6 +24,21 @@ const modals = () => {
           event.preventDefault();
         }
 
+        if (item.closest('.popup_calc')) {
+          let width = document.querySelector('#width');
+          let height = document.querySelector('#height');
+
+          if (!width.value.trim()) {
+            width.focus();
+            return;
+          }
+
+          if (!height.value.trim()) {
+            height.focus();
+            return;
+          }
+        }
+
         windows.forEach(window => {
           window.style.display = '';
         });
