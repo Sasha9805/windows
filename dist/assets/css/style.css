@@ -1313,6 +1313,15 @@ textarea:focus {
     margin-right: 0;
     margin-bottom: 2rem;
   }
+
+  .img_width {
+    width: 80%;
+    height: 65%;
+  }
+
+  .img_bigger_height {
+    height: 85%;
+  }
 }
 
 @media (max-width: 767px) {

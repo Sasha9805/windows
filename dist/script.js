@@ -18512,6 +18512,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
 /* harmony import */ var _modules_initModalState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/initModalState */ "./src/js/modules/initModalState.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
+/* harmony import */ var _modules_images__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/images */ "./src/js/modules/images.js");
+
 
 
 
@@ -18532,6 +18534,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
   Object(_modules_timer__WEBPACK_IMPORTED_MODULE_6__["default"])('.container1', deadline);
+  Object(_modules_images__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ }),
@@ -18756,6 +18759,60 @@ var forms = function forms(state) {
 
 /***/ }),
 
+/***/ "./src/js/modules/images.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/images.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var images = function images() {
+  var imgPopup = document.createElement('div'),
+      workSection = document.querySelector('.works'),
+      bigImage = document.createElement('img'),
+      images = workSection.querySelectorAll('img');
+  imgPopup.classList.add('popup_calc');
+  imgPopup.setAttribute('data-popup', '');
+  imgPopup.append(bigImage);
+  workSection.append(imgPopup);
+  imgPopup.style.display = 'none';
+  imgPopup.style.justifyContent = 'center';
+  imgPopup.style.alignItems = 'center';
+  bigImage.classList.add('img_width');
+  workSection.addEventListener('click', function (event) {
+    event.preventDefault();
+    var target = event.target;
+
+    if (target && target.classList.contains('preview')) {
+      imgPopup.style.display = 'flex';
+      var path = target.parentNode.getAttribute('href');
+      images.forEach(function (item, i) {
+        if (item == target && (i == 1 || i == 4 || i == 5 || i == 6)) {
+          bigImage.classList.add('img_bigger_height');
+        }
+      });
+      bigImage.src = path;
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (target && target.matches('.popup_calc')) {
+      imgPopup.style.display = 'none';
+      document.body.style.overflow = '';
+      bigImage.classList.remove('img_bigger_height');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (images);
+
+/***/ }),
+
 /***/ "./src/js/modules/initModalState.js":
 /*!******************************************!*\
   !*** ./src/js/modules/initModalState.js ***!
@@ -18851,6 +18908,7 @@ var modals = function modals() {
 
         windows.forEach(function (window) {
           window.style.display = '';
+          window.style.backgroundColor = '';
 
           if (window.classList.contains('popup_calc_end')) {
             window.setAttribute('data-closed', 'close');
@@ -18875,7 +18933,11 @@ var modals = function modals() {
         }
       });
       modal.style.display = '';
-      document.body.style.overflow = ''; // document.body.classList.remove('modal-open');
+
+      if (!(document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex')) {
+        document.body.style.overflow = '';
+      } // document.body.classList.remove('modal-open');
+
 
       setTimeout(function () {
         if (eventClose) {
@@ -18893,7 +18955,11 @@ var modals = function modals() {
           }
         });
         modal.style.display = '';
-        document.body.style.overflow = '';
+
+        if (!(document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex')) {
+          document.body.style.overflow = '';
+        }
+
         setTimeout(function () {
           if (eventClose) {
             document.body.dispatchEvent(eventClose);
@@ -18910,6 +18976,9 @@ var modals = function modals() {
       if (document.body.style.overflow == '') {
         document.querySelector(selector).style.display = 'block';
         document.body.style.overflow = 'hidden';
+      } else if (document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex') {
+        document.querySelector(selector).style.display = 'block';
+        document.querySelector(selector).style.backgroundColor = 'transparent';
       } else {
         document.body.addEventListener('close', function (event) {
           if (event.detail.open) {

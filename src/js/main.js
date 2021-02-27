@@ -5,6 +5,7 @@ import forms from './modules/forms';
 import changeModalState from './modules/changeModalState';
 import initModalState from './modules/initModalState';
 import timer from './modules/timer';
+import images from './modules/images';
 
 window.addEventListener('DOMContentLoaded', () => {
   "use strict";
@@ -25,5 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
   forms(modalState);
 
   timer('.container1', deadline);
+
+  images();
 
 });

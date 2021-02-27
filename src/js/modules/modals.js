@@ -41,6 +41,7 @@ const modals = () => {
 
         windows.forEach(window => {
           window.style.display = '';
+          window.style.backgroundColor = '';
           if (window.classList.contains('popup_calc_end')) {
             window.setAttribute('data-closed', 'close');
           }
@@ -69,7 +70,9 @@ const modals = () => {
 
       modal.style.display = '';
 
-      document.body.style.overflow = '';
+      if (!(document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex')) {
+        document.body.style.overflow = '';
+      }
       // document.body.classList.remove('modal-open');
 
       setTimeout(() => {
@@ -92,7 +95,9 @@ const modals = () => {
 
         modal.style.display = '';
 
-        document.body.style.overflow = '';
+        if (!(document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex')) {
+          document.body.style.overflow = '';
+        }
 
         setTimeout(() => {
           if (eventClose) {
@@ -113,6 +118,9 @@ const modals = () => {
         document.querySelector(selector).style.display = 'block';
 
         document.body.style.overflow = 'hidden';
+      } else if (document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex') {
+        document.querySelector(selector).style.display = 'block';
+        document.querySelector(selector).style.backgroundColor = 'transparent';
       } else {
         document.body.addEventListener('close', event => {
 
