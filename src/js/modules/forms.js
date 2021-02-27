@@ -66,7 +66,6 @@ const forms = state => {
               delete state[key];
             }
             initModalState(state);
-            console.log(state);
           }
 
           setTimeout(() => {
