@@ -41,6 +41,9 @@ const modals = () => {
 
         windows.forEach(window => {
           window.style.display = '';
+          if (window.classList.contains('popup_calc_end')) {
+            window.setAttribute('data-closed', 'close');
+          }
         });
 
         if (item.classList.contains('phone_link')) {
@@ -59,6 +62,9 @@ const modals = () => {
 
       windows.forEach(window => {
         window.style.display = '';
+        if (window.classList.contains('popup_calc_end')) {
+          window.setAttribute('data-closed', 'close');
+        }
       });
 
       modal.style.display = '';
@@ -79,6 +85,9 @@ const modals = () => {
 
         windows.forEach(window => {
           window.style.display = '';
+          if (window.classList.contains('popup_calc_end')) {
+            window.setAttribute('data-closed', 'close');
+          }
         });
 
         modal.style.display = '';

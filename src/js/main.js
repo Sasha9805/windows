@@ -3,11 +3,15 @@ import modals from './modules/modals';
 import tabs from './modules/tabs';
 import forms from './modules/forms';
 import changeModalState from './modules/changeModalState';
+import initModalState from './modules/initModalState';
 
 window.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
   let modalState = {};
+
+  initModalState(modalState);
+  console.log(modalState);
 
   changeModalState(modalState);
   

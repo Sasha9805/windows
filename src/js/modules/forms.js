@@ -1,4 +1,5 @@
 import checkNumInputs from './checkNumInputs';
+import initModalState from './initModalState';
 
 const forms = state => {
 
@@ -58,8 +59,22 @@ const forms = state => {
         })
         .finally(() => {
           clearInputs();
+
+          if (item.closest('.popup_calc_end')) {
+            item.closest('.popup_calc_end').setAttribute('data-closed', 'open');
+            for (let key in state) {
+              delete state[key];
+            }
+            initModalState(state);
+            console.log(state);
+          }
+
           setTimeout(() => {
             statusMessage.remove();
+            if (item.closest('.popup_calc_end') && 
+                item.closest('.popup_calc_end').getAttribute('data-closed') == 'open') {
+              document.querySelector('.popup_calc_end .popup_calc_end_close').click();
+            }
           }, 3000);
         });
     });
