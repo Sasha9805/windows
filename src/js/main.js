@@ -6,9 +6,12 @@ import changeModalState from './modules/changeModalState';
 import initModalState from './modules/initModalState';
 import timer from './modules/timer';
 import images from './modules/images';
+import WOW from '/node_modules/wow.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   "use strict";
+
+  new WOW().init();
 
   let modalState = {};
   let deadline = '2021-03-08';

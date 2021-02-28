@@ -14,7 +14,8 @@ const modals = () => {
     const trigger = document.querySelectorAll(triggerSelector),
           modal = document.querySelector(modalSelector),
           close = document.querySelector(closeSelector),
-          windows = document.querySelectorAll('[data-modal]');
+          windows = document.querySelectorAll('[data-modal]'),
+          scroll = calcScroll();
 
     trigger.forEach(item => {
     
@@ -56,6 +57,7 @@ const modals = () => {
 
         document.body.style.overflow = 'hidden';
         // document.body.classList.add('modal-open');
+        document.body.style.marginRight = scroll + 'px';
       });
     });
 
@@ -72,6 +74,7 @@ const modals = () => {
 
       if (!(document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex')) {
         document.body.style.overflow = '';
+        document.body.style.marginRight = '';
       }
       // document.body.classList.remove('modal-open');
 
@@ -97,6 +100,7 @@ const modals = () => {
 
         if (!(document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex')) {
           document.body.style.overflow = '';
+          document.body.style.marginRight = '';
         }
 
         setTimeout(() => {
@@ -118,6 +122,7 @@ const modals = () => {
         document.querySelector(selector).style.display = 'block';
 
         document.body.style.overflow = 'hidden';
+        document.body.style.marginRight = calcScroll() + 'px';
       } else if (document.querySelector('[data-popup]') && document.querySelector('[data-popup]').style.display == 'flex') {
         document.querySelector(selector).style.display = 'block';
         document.querySelector(selector).style.backgroundColor = 'transparent';
@@ -131,6 +136,8 @@ const modals = () => {
 
               document.body.style.overflow = 'hidden';
 
+              document.body.style.marginRight = calcScroll() + 'px';
+
               event.detail.open = false;
             }
           }
@@ -139,7 +146,7 @@ const modals = () => {
     }, time);
   }
 
-  showModalByTime('.popup', 5000);
+  showModalByTime('.popup', 60000);
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
   bindModal('.phone_link', '.popup', '.popup .popup_close');
@@ -148,4 +155,17 @@ const modals = () => {
   bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
 };
 
-export default modals;
+function calcScroll() {
+  let div = document.createElement('div');
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.overflowY = 'scroll';
+  div.style.visibility = 'hidden';
+  document.body.append(div);
+  let scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+
+  return scrollWidth;
+}
+
+export {modals as default, calcScroll};

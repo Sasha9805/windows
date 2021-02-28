@@ -1,3 +1,5 @@
+import {calcScroll} from './modals';
+
 const images = () => {
 
   const imgPopup = document.createElement('div'),
@@ -30,11 +32,13 @@ const images = () => {
       });
       bigImage.src = path;
       document.body.style.overflow = 'hidden';
+      document.body.style.marginRight = calcScroll() + 'px';
     }
 
     if (target && target.matches('.popup_calc')) {
       imgPopup.style.display = 'none';
       document.body.style.overflow = '';
+      document.body.style.marginRight = '';
       bigImage.classList.remove('img_bigger_height');
     }
   });
